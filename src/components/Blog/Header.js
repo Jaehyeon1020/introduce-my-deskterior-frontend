@@ -23,10 +23,10 @@ function Header(props) {
           {title}
         </Typography>
         <ButtonGroup color="success">
-          <Button variant="outlined" size="small">
+          <Button variant="contained" size="small" href="/signin">
             로그인
           </Button>
-          <Button variant="outlined" size="small">
+          <Button variant="contained" size="small" href="/signup">
             회원가입
           </Button>
         </ButtonGroup>
