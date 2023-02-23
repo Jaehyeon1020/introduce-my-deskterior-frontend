@@ -4,6 +4,9 @@ import SignIn from "./routes/SignIn";
 import DeskteriorBoards from "./routes/DeskteriorBoards";
 import HoneyItemBoards from "./routes/HoneyItemBoards";
 import QuestionBoards from "./routes/QuestionBoards";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:3000";
 
 function App() {
   return (

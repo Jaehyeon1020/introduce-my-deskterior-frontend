@@ -19,7 +19,7 @@ function FeaturedPost(props) {
               {post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+              {post.createdAt.substr(0, 10)}
             </Typography>
             <Typography variant="subtitle1" paragraph>
               {post.description}
@@ -27,9 +27,8 @@ function FeaturedPost(props) {
           </CardContent>
           <CardMedia
             component="img"
-            sx={{ width: 160, display: { xs: "none", sm: "block" } }}
+            sx={{ width: 160, height: 160 }}
             image={post.image}
-            alt={post.imageLabel}
           />
         </Card>
       </CardActionArea>
@@ -39,11 +38,12 @@ function FeaturedPost(props) {
 
 FeaturedPost.propTypes = {
   post: PropTypes.shape({
-    date: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    imageLabel: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    authorid: PropTypes.number.isRequired,
   }).isRequired,
 };
 

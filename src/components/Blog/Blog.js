@@ -14,49 +14,6 @@ const sections = [
   { title: "질문하기", url: "/questions" },
 ];
 
-const featuredPosts = [
-  {
-    title: "1번 글",
-    date: "Nov 12",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageLabel: "Image Text",
-  },
-  {
-    title: "2번 글",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageLabel: "Image Text",
-  },
-  {
-    title: "3번 글",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageLabel: "Image Text",
-  },
-  {
-    title: "4번 글",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageLabel: "Image Text",
-  },
-  {
-    title: "5번 글",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageLabel: "Image Text",
-  },
-];
-
 const theme = createTheme();
 
 function getMainFeaturedPost(boardType) {
@@ -91,7 +48,9 @@ function getMainFeaturedPost(boardType) {
 }
 
 export default function Blog(props) {
-  const { boardType } = props;
+  const { boardType, boardDatas } = props;
+
+  const featuredPosts = boardDatas;
 
   const mainFeaturedPost = getMainFeaturedPost(boardType);
 
