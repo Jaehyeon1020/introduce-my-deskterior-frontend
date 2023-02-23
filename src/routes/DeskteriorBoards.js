@@ -4,17 +4,35 @@ import { useEffect, useState } from "react";
 
 export default function DeskteriorBoards() {
   const [boards, setBoards] = useState([]);
+  const [loginStatus, setLoginStatus] = useState(false);
 
   useEffect(() => {
     axios.get("/deskteriors").then((res) => {
-      // console.log(res); // test
       setBoards(res.data);
     });
+
+    try {
+      axios
+        .get("/auth/logincheck")
+        .then((res) => {
+          setLoginStatus(true);
+        })
+        .catch((err) => {
+          setLoginStatus(false);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
     <div>
-      <Blog boardType="deskterior" boardDatas={boards} />
+      <Blog
+        boardType="deskterior"
+        boardDatas={boards}
+        loginStatus={loginStatus}
+        logoutTrigger={setLoginStatus}
+      />
     </div>
   );
 }

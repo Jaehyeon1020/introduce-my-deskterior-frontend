@@ -10,6 +10,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -27,13 +29,27 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const userData = {
+      username: data.get("id"),
       password: data.get("password"),
-    });
+    };
+
+    axios
+      .post("auth/signin", userData)
+      .then((res) => {
+        if (res.status === 201) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("아이디 또는 비밀번호가 틀렸습니다.");
+      });
   };
 
   return (

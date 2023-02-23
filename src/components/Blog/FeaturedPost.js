@@ -43,7 +43,7 @@ FeaturedPost.propTypes = {
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    authorid: PropTypes.number.isRequired,
+    authorId: PropTypes.number.isRequired,
   }).isRequired,
 };
 

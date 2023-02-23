@@ -5,9 +5,16 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
+import axios from "axios";
 
 function Header(props) {
-  const { sections, title } = props;
+  const { sections, title, loginStatus, logoutTrigger } = props;
+
+  const logoutButtonHandler = () => {
+    axios.post("/auth/logout").then((res) => {
+      logoutTrigger(false);
+    });
+  };
 
   return (
     <React.Fragment>
@@ -22,14 +29,26 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <ButtonGroup color="success">
-          <Button variant="contained" size="small" href="/signin">
-            로그인
+        {!loginStatus ? (
+          <ButtonGroup color="success">
+            <Button variant="contained" size="small" href="/signin">
+              로그인
+            </Button>
+            <Button variant="contained" size="small" href="/signup">
+              회원가입
+            </Button>
+          </ButtonGroup>
+        ) : (
+          <Button
+            className="logoutButton"
+            variant="contained"
+            size="small"
+            color="success"
+            onClick={logoutButtonHandler}
+          >
+            로그아웃
           </Button>
-          <Button variant="contained" size="small" href="/signup">
-            회원가입
-          </Button>
-        </ButtonGroup>
+        )}
       </Toolbar>
       <Toolbar
         component="nav"

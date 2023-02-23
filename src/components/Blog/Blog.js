@@ -48,17 +48,20 @@ function getMainFeaturedPost(boardType) {
 }
 
 export default function Blog(props) {
-  const { boardType, boardDatas } = props;
-
+  const { boardType, boardDatas, loginStatus, logoutTrigger } = props;
   const featuredPosts = boardDatas;
-
   const mainFeaturedPost = getMainFeaturedPost(boardType);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="내책상자랑하기" sections={sections} />
+        <Header
+          title="내책상자랑하기"
+          sections={sections}
+          loginStatus={loginStatus}
+          logoutTrigger={logoutTrigger}
+        />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
