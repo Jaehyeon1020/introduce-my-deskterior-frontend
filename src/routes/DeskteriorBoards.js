@@ -15,6 +15,7 @@ export default function DeskteriorBoards() {
       axios
         .get("/auth/logincheck")
         .then((res) => {
+          console.log(res);
           setLoginStatus(true);
         })
         .catch((err) => {

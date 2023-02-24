@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 function Copyright(props) {
   return (
@@ -30,6 +31,7 @@ const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,7 +44,9 @@ export default function SignIn() {
     axios
       .post("auth/signin", userData)
       .then((res) => {
-        if (res.status === 201) {
+        if (res.status === 201 || res.status === 200) {
+          console.log(res.data);
+          setCookie("username", res.data.username, { path: "/" });
           navigate("/");
         }
       })

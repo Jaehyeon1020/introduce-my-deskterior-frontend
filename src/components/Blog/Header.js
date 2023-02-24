@@ -6,13 +6,16 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Header(props) {
   const { sections, title, loginStatus, logoutTrigger } = props;
+  const [cookies, setCookie, deleteCookie] = useCookies([]);
 
   const logoutButtonHandler = () => {
     axios.post("/auth/logout").then((res) => {
       logoutTrigger(false);
+      deleteCookie("username"); // 로그아웃하면서 쿠키에 저장된 username 삭제
     });
   };
 
@@ -39,15 +42,25 @@ function Header(props) {
             </Button>
           </ButtonGroup>
         ) : (
-          <Button
-            className="logoutButton"
-            variant="contained"
-            size="small"
-            color="success"
-            onClick={logoutButtonHandler}
-          >
-            로그아웃
-          </Button>
+          <div>
+            <span
+              style={{
+                fontSize: "13px",
+                paddingRight: "10px",
+              }}
+            >
+              {cookies.username}님 환영합니다!
+            </span>
+            <Button
+              className="logoutButton"
+              variant="contained"
+              size="small"
+              color="success"
+              onClick={logoutButtonHandler}
+            >
+              로그아웃
+            </Button>
+          </div>
         )}
       </Toolbar>
       <Toolbar
