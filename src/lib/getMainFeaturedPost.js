@@ -3,7 +3,7 @@
  */
 
 export function getMainFeaturedPost(boardType) {
-  if (boardType === "deskterior") {
+  if (boardType === "deskteriors") {
     return {
       title: "내 책상 자랑하기",
       description: "여러분의 책상을 자랑하세요!",
@@ -12,7 +12,7 @@ export function getMainFeaturedPost(boardType) {
       imageText: "main image description",
       linkText: "",
     };
-  } else if (boardType === "honeyitem") {
+  } else if (boardType === "honeyitems") {
     return {
       title: "꿀템 추천하기",
       description: "데스크테리어 꿀템들을 추천해주세요!",
