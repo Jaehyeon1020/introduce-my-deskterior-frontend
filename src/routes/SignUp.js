@@ -10,6 +10,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -27,13 +29,37 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const id = data.get("id");
+    const pw = data.get("password");
+    const pwCheck = data.get("password-check");
+
+    if (pw !== pwCheck) {
+      alert("비밀번호 확인이 일치하지 않습니다. 비밀번호를 다시 확인해주세요.");
+      return;
+    }
+
+    const userData = {
+      username: id,
+      password: pw,
+    };
+
+    axios
+      .post("auth/signup", userData)
+      .then((res) => {
+        alert("회원가입을 축하합니다! 로그인해주세요.");
+        navigate("/signin");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+      });
   };
 
   return (
@@ -79,6 +105,7 @@ export default function SignUp() {
                   label="비밀번호"
                   name="password"
                   autoComplete="new-password"
+                  type="password"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -87,9 +114,9 @@ export default function SignUp() {
                   fullWidth
                   name="password-check"
                   label="비밀번호 확인"
-                  type="password-check"
                   id="password-check"
                   autoComplete="new-password-check"
+                  type="password"
                 />
               </Grid>
             </Grid>

@@ -35,6 +35,7 @@ export default function SignIn() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const userData = {
       username: data.get("id"),
