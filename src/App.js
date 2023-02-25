@@ -5,30 +5,22 @@ import DeskteriorBoards from "./routes/DeskteriorBoards";
 import HoneyItemBoards from "./routes/HoneyItemBoards";
 import QuestionBoards from "./routes/QuestionBoards";
 import axios from "axios";
+import Board from "./routes/Board";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/deskterior" />} />
-        <Route path="/deskterior" element={<DeskteriorBoards />} />
-        <Route
-          path="/deskterior/:id"
-          element={<h1>데스크테리어 게시판 글 상세보기 페이지</h1>}
-        />
+        <Route path="/" element={<Navigate to="/deskteriors" />} />
+        <Route path="/deskteriors" element={<DeskteriorBoards />} />
+        <Route path="/deskteriors/:id" element={<Board />} />
         <Route path="/honeyitems" element={<HoneyItemBoards />} />
-        <Route
-          path="/honeyitems/:id"
-          element={<h1>꿀템 추천 게시판 글 상세보기 페이지</h1>}
-        />
+        <Route path="/honeyitems/:id" element={<Board />} />
         <Route path="/questions" element={<QuestionBoards />} />
-        <Route
-          path="/questions/:id"
-          element={<h1>질문 게시판 글 상세보기 페이지</h1>}
-        />
+        <Route path="/questions/:id" element={<Board />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/user/:id" element={<h1>유저 정보 페이지</h1>} />
