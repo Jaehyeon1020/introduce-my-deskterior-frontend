@@ -1,4 +1,8 @@
-import Blog from "../components/Blog/Blog";
+/**
+ * 질문 게시판 전체 글 페이지
+ */
+
+import Blog from "../components/Blog";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,7 +19,7 @@ export default function QuestionBoards() {
 
   return (
     <div>
-      <Blog boardType="question" boardDatas={boards} />
+      <Blog boardType="questions" boardDatas={boards} />
     </div>
   );
 }

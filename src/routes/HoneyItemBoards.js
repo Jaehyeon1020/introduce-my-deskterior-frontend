@@ -1,4 +1,8 @@
-import Blog from "../components/Blog/Blog";
+/**
+ * 꿀템 게시판 전체 글 페이지
+ */
+
+import Blog from "../components/Blog";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,7 +19,7 @@ export default function HoneyItemBoards() {
 
   return (
     <div>
-      <Blog boardType="honeyitem" boardDatas={boards} />
+      <Blog boardType="honeyitems" boardDatas={boards} />
     </div>
   );
 }
