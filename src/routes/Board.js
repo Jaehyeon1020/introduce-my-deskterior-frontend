@@ -16,6 +16,7 @@ import { getBoardTypeFromUrl } from "../lib/getBoardTypeFromUrl";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useAsync } from "react-async";
 
 const theme = createTheme();
 
@@ -23,11 +24,14 @@ export default function Board(props) {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [loginStatus, setLoginStatus] = useState(false);
   const [boardContent, setBoardContent] = useState([]);
 
   const boardType = getBoardTypeFromUrl(window.location.href);
   const mainFeaturedPost = getMainFeaturedPost(boardType);
+
+  const { data: isLogin } = useAsync({
+    promiseFn: loginCheck,
+  });
 
   /* 글 수정 버튼 */
   const patchButtonHandler = function () {
@@ -57,8 +61,6 @@ export default function Board(props) {
       .catch((err) => {
         alert("게시글 불러오기에 실패하였습니다. 다시 시도 해 주세요.");
       });
-
-    setLoginStatus(loginCheck());
   }, []);
 
   return (
@@ -68,8 +70,7 @@ export default function Board(props) {
         <Header
           title="내책상자랑하기"
           sections={sections}
-          loginStatus={loginStatus}
-          logoutTrigger={setLoginStatus}
+          loginStatus={isLogin}
         />
         <MainFeaturedPost post={mainFeaturedPost} />
         <main>
@@ -79,7 +80,7 @@ export default function Board(props) {
             marginBottom="30px"
             display="block"
           >
-            <Typography className="board-title" variant="h3" fontSize="30px">
+            <Typography className="board-title" variant="h3" fontSize="25px">
               제목: {boardContent.title}
             </Typography>
             <Typography align="right">
@@ -103,23 +104,19 @@ export default function Board(props) {
             <Typography
               className="board-description"
               variant="body1"
-              fontSize="20px"
+              fontSize="18px"
             >
               {boardContent.description}
             </Typography>
           </Grid>
-          <Grid container paddingLeft="45px">
+          <Grid container paddingLeft="45px" marginTop="80px">
             <Grid item xs={11}></Grid>
             <Grid item>
-              <ButtonGroup>
+              <ButtonGroup color="success">
                 <Button variant="text" onClick={patchButtonHandler}>
                   수정
                 </Button>
-                <Button
-                  variant="text"
-                  color="error"
-                  onClick={deleteButtonHandler}
-                >
+                <Button variant="text" onClick={deleteButtonHandler}>
                   삭제
                 </Button>
               </ButtonGroup>

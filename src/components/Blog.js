@@ -9,6 +9,7 @@ import FeaturedPost from "./FeaturedPost";
 import Footer from "./Footer";
 import { sections } from "../lib/sections";
 import { getMainFeaturedPost } from "../lib/getMainFeaturedPost";
+import Button from "@mui/material/Button";
 
 const theme = createTheme();
 
@@ -36,6 +37,19 @@ export default function Blog(props) {
                 boardType={boardType}
               />
             ))}
+          </Grid>
+          <Grid container marginTop="50px">
+            <Grid item xs={11}></Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                size="small"
+                color="success"
+                href={window.location.href + "/new"}
+              >
+                글 작성
+              </Button>
+            </Grid>
           </Grid>
         </main>
       </Container>
