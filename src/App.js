@@ -7,11 +7,17 @@ import QuestionBoards from "./routes/QuestionBoards";
 import axios from "axios";
 import Board from "./routes/Board";
 import NewBoard from "./routes/NewBoard";
+import { useAsync } from "react-async";
+import { loginCheck } from "./lib/loginCheck";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
+  const { data: isLogin } = useAsync({
+    promiseFn: loginCheck,
+  });
+
   return (
     <BrowserRouter>
       <Routes>
@@ -22,7 +28,7 @@ function App() {
         <Route path="/deskteriors/:id" element={<Board />} />
         <Route
           path="/deskteriors/new"
-          element={<NewBoard boardType="deskteriors" />}
+          element={<NewBoard boardType="deskteriors" loginStatus={isLogin} />}
         />
 
         {/* 꿀템 추천 게시판 */}
@@ -30,7 +36,7 @@ function App() {
         <Route path="/honeyitems/:id" element={<Board />} />
         <Route
           path="/honeyitems/new"
-          element={<NewBoard boardType="honeyitems" />}
+          element={<NewBoard boardType="honeyitems" loginStatus={isLogin} />}
         />
 
         {/* 질문 게시판 */}
@@ -38,7 +44,7 @@ function App() {
         <Route path="/questions/:id" element={<Board />} />
         <Route
           path="/questions/new"
-          element={<NewBoard boardType="questions" />}
+          element={<NewBoard boardType="questions" loginStatus={isLogin} />}
         />
 
         {/* 로그인, 회원가입 */}

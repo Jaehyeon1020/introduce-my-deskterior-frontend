@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import { sections } from "../lib/sections";
 import { getMainFeaturedPost } from "../lib/getMainFeaturedPost";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -17,6 +18,15 @@ export default function Blog(props) {
   const { boardType, boardDatas, loginStatus } = props;
   const featuredPosts = boardDatas;
   const mainFeaturedPost = getMainFeaturedPost(boardType);
+  const navigate = useNavigate();
+
+  const newPostButtonHandler = function (e) {
+    if (!loginStatus) {
+      e.preventDefault();
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/signin");
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -46,6 +56,7 @@ export default function Blog(props) {
                 size="small"
                 color="success"
                 href={window.location.href + "/new"}
+                onClick={newPostButtonHandler}
               >
                 글 작성
               </Button>
