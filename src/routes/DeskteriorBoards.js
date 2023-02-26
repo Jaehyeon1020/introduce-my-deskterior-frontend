@@ -6,10 +6,14 @@ import Blog from "../components/Blog";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { loginCheck } from "../lib/loginCheck";
+import { useAsync } from "react-async";
 
 export default function DeskteriorBoards() {
   const [boards, setBoards] = useState([]);
-  const [loginStatus, setLoginStatus] = useState(false);
+
+  const { data: isLogin } = useAsync({
+    promiseFn: loginCheck,
+  });
 
   useEffect(() => {
     axios
@@ -20,18 +24,11 @@ export default function DeskteriorBoards() {
       .catch((err) => {
         alert("게시판 불러오기에 실패하였습니다. 다시 시도 해 주세요.");
       });
-
-    setLoginStatus(loginCheck());
   }, []);
 
   return (
     <div>
-      <Blog
-        boardType="deskteriors"
-        boardDatas={boards}
-        loginStatus={loginStatus}
-        logoutTrigger={setLoginStatus}
-      />
+      <Blog boardType="deskteriors" boardDatas={boards} loginStatus={isLogin} />
     </div>
   );
 }

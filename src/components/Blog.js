@@ -13,7 +13,7 @@ import { getMainFeaturedPost } from "../lib/getMainFeaturedPost";
 const theme = createTheme();
 
 export default function Blog(props) {
-  const { boardType, boardDatas, loginStatus, logoutTrigger } = props;
+  const { boardType, boardDatas, loginStatus } = props;
   const featuredPosts = boardDatas;
   const mainFeaturedPost = getMainFeaturedPost(boardType);
 
@@ -25,7 +25,6 @@ export default function Blog(props) {
           title="내책상자랑하기"
           sections={sections}
           loginStatus={loginStatus}
-          logoutTrigger={logoutTrigger}
         />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />

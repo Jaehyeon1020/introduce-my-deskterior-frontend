@@ -4,19 +4,11 @@
 
 import axios from "axios";
 
-export function loginCheck() {
+export async function loginCheck() {
   try {
-    axios
-      .get("/auth/logincheck")
-      .then((res) => {
-        console.log(res);
-        return true;
-      })
-      .catch((err) => {
-        return false;
-      });
+    const result = await axios.get("/auth/logincheck");
+    return true;
   } catch (err) {
-    console.log(err);
     return false;
   }
 }

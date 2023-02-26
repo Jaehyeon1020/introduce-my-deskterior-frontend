@@ -7,15 +7,17 @@ import Link from "@mui/material/Link";
 import { ButtonGroup } from "@mui/material";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 function Header(props) {
-  const { sections, title, loginStatus, logoutTrigger } = props;
+  const { sections, title, loginStatus } = props;
   const [cookies, setCookie, deleteCookie] = useCookies([]);
+  const navigate = useNavigate();
 
   const logoutButtonHandler = () => {
     axios.post("/auth/logout").then((res) => {
-      logoutTrigger(false);
       deleteCookie("username"); // 로그아웃하면서 쿠키에 저장된 username 삭제
+      navigate("/");
     });
   };
 

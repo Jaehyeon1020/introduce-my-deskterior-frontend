@@ -109,8 +109,8 @@ export default function Board(props) {
             </Typography>
           </Grid>
           <Grid container paddingLeft="45px">
-            <Grid xs={11}></Grid>
-            <Grid>
+            <Grid item xs={11}></Grid>
+            <Grid item>
               <ButtonGroup>
                 <Button variant="text" onClick={patchButtonHandler}>
                   수정
