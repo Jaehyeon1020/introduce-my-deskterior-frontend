@@ -17,6 +17,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useAsync } from "react-async";
+import EditBoard from "./EditBoard";
 
 const theme = createTheme();
 
@@ -35,7 +36,12 @@ export default function Board(props) {
 
   /* 글 수정 버튼 */
   const patchButtonHandler = function () {
-    // 글 수정 페이지로 연결
+    if (!isLogin) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/signin");
+    } else {
+      navigate("/" + boardType + "/" + id + "/edit");
+    }
   };
 
   /* 글 삭제 버튼 */
