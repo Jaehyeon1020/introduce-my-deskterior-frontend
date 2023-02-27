@@ -58,7 +58,6 @@ export default function NewBoard(props) {
       })
       .catch((err) => {
         alert("새 글 등록에 실패하였습니다. 다시 시도해 주세요.");
-        navigate("/" + boardType);
       });
   };
 
