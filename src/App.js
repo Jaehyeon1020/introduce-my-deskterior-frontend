@@ -9,6 +9,7 @@ import Board from "./routes/Board";
 import NewBoard from "./routes/NewBoard";
 import { useAsync } from "react-async";
 import { loginCheck } from "./lib/loginCheck";
+import EditBoard from "./routes/EditBoard";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -30,6 +31,10 @@ function App() {
           path="/deskteriors/new"
           element={<NewBoard boardType="deskteriors" loginStatus={isLogin} />}
         />
+        <Route
+          path="/deskteriors/:id/edit"
+          element={<EditBoard boardType="deskteriors" loginStatus={isLogin} />}
+        />
 
         {/* 꿀템 추천 게시판 */}
         <Route path="/honeyitems" element={<HoneyItemBoards />} />
@@ -38,6 +43,10 @@ function App() {
           path="/honeyitems/new"
           element={<NewBoard boardType="honeyitems" loginStatus={isLogin} />}
         />
+        <Route
+          path="/honeyitems/:id/edit"
+          element={<EditBoard boardType="honeyitems" loginStatus={isLogin} />}
+        />
 
         {/* 질문 게시판 */}
         <Route path="/questions" element={<QuestionBoards />} />
@@ -45,6 +54,10 @@ function App() {
         <Route
           path="/questions/new"
           element={<NewBoard boardType="questions" loginStatus={isLogin} />}
+        />
+        <Route
+          path="/questions/:id/edit"
+          element={<EditBoard boardType="questions" loginStatus={isLogin} />}
         />
 
         {/* 로그인, 회원가입 */}
