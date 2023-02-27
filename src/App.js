@@ -10,6 +10,7 @@ import NewBoard from "./routes/NewBoard";
 import { useAsync } from "react-async";
 import { loginCheck } from "./lib/loginCheck";
 import EditBoard from "./routes/EditBoard";
+import MyPage from "./routes/MyPage";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -65,7 +66,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
 
         {/* 유저 정보 */}
-        <Route path="/user/:id" element={<h1>유저 정보 페이지</h1>} />
+        <Route path="/mypage" element={<MyPage loginStatus={isLogin} />} />
       </Routes>
     </BrowserRouter>
   );
