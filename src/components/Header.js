@@ -45,19 +45,21 @@ function Header(props) {
           </ButtonGroup>
         ) : (
           <div>
-            <span
+            <a
+              href="/mypage"
               style={{
-                fontSize: "13px",
+                color: "black",
+                fontSize: "15px",
                 paddingRight: "10px",
               }}
             >
               {cookies.username}님 환영합니다!
-            </span>
+            </a>
             <Button
               className="logoutButton"
               variant="contained"
-              size="small"
               color="success"
+              size="small"
               onClick={logoutButtonHandler}
             >
               로그아웃
