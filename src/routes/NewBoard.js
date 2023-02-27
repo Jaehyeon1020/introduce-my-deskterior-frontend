@@ -27,7 +27,23 @@ export default function NewBoard(props) {
       image: data.get("image"),
     };
 
-    console.log(boardData);
+    /* 글 작성 시 제한사항 */
+    if (!boardData.title || !boardData.description || !boardData.image.size) {
+      alert("글 제목, 내용, 이미지는 필수 입력 항목입니다.");
+      return;
+    } else if (boardData.title.length < 2 || boardData.title.length > 50) {
+      alert("제목을 2글자 이상, 50글자 이하로 입력 해 주세요.");
+      return;
+    } else if (
+      boardData.description.length < 5 ||
+      boardData.description.length > 500
+    ) {
+      alert("내용을 5글자 이상, 500글자 이하로 입력 해 주세요.");
+      return;
+    } else if (boardData.image.size > 5 * 1024 * 1024) {
+      alert("5MB 이하 용량의 이미지만 업로드가 가능합니다.");
+      return;
+    }
 
     axios
       .post(boardType, boardData, {
