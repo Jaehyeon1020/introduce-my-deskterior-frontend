@@ -62,7 +62,12 @@ export default function SignUp() {
       })
       .catch((err) => {
         console.log(err);
-        alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+
+        if (err.response.status === 406) {
+          alert("이미 존재하는 아이디입니다.");
+        } else {
+          alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+        }
       });
   };
 
