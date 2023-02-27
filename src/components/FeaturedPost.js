@@ -16,13 +16,15 @@ function FeaturedPost(props) {
         <Card sx={{ display: "flex" }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
-              {post.title}
+              {post.title.length > 20 ? post.title.substr(0, 20) : post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
               {post.createdAt.substr(0, 10)}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.description.length > 30
+                ? post.description.substr(0, 30)
+                : post.description}
             </Typography>
           </CardContent>
           <CardMedia
