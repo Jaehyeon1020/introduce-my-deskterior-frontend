@@ -80,7 +80,7 @@ export default function MyPage(props) {
         />
         <MainFeaturedPost post={mainFeaturedPost} />
         <main>
-          <Typography variant="h2" marginBottom="30px">
+          <Typography variant="h3" marginBottom="30px">
             작성한 글
           </Typography>
           <Typography variant="h3" fontSize="30px" marginBottom="15px">
@@ -138,7 +138,7 @@ export default function MyPage(props) {
           <Grid container marginTop="50px">
             <Grid item xs={11}></Grid>
             <Grid item>
-              <Button size="small" color="warning" onClick={outButtonHandler}>
+              <Button size="medium" color="warning" onClick={outButtonHandler}>
                 회원 탈퇴
               </Button>
             </Grid>
